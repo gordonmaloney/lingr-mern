@@ -26,7 +26,9 @@ export const Ling = (props) => {
                     </center>
                   </div>
                   <CardFooter>
-                    0 Replies | 0 Corrections
+                    {ling.lingRepliesObj.filter(ling => ling.replyType === "reply").length} Replies
+                    |
+                    {ling.lingRepliesObj.filter(ling => ling.replyType === "correction").length} Corrections
                     <span className="ling-date">{ling.lingDate}</span>
                   </CardFooter>
                   <CardBody className="ling-reply">
