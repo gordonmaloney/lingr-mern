@@ -9,11 +9,11 @@ const postSchema = mongoose.Schema({
   lingCorPref: String,
   lingRepliesObj: [
     {
-    replyId: Number,
+    replyId: String,
     replyAuthor: String,
-    replyType: String,
-    correctionBody: String,
     replyBody: String,
+    correctionBody: String,
+    replyType: String,
     replyDate: String
     }
   ]
