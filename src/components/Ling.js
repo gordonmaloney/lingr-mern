@@ -1,0 +1,90 @@
+import React from "react";
+import { Card, CardHeader, CardBody, CardFooter } from "reactstrap";
+import { Link } from "react-router-dom";
+
+export const Ling = (props) => {
+  const LingsList = (props) => {
+    if (props.lings > 0) {
+      return <div className="loader">🤔</div>;
+    } else {
+      return props.lings.map((ling) => {
+        if (props.lang === "Show All") {
+          return (
+            <>
+              <Link to={`/reply/${ling._id}`} className="timeline-no-link">
+                <Card className="ling mb-3">
+                  <CardHeader>
+                    <span className="ling-date">{ling.lingLang}</span>
+                    <h3>
+                      {ling.userIcon} - {ling.userName}
+                    </h3>
+                  </CardHeader>
+                  <CardBody>{ling.lingBody}</CardBody>
+                  <div className="cor-pref-timeline">
+                    <center>
+                      Correction preference: <b>{ling.lingCorPref}</b>
+                    </center>
+                  </div>
+                  <CardFooter>
+                    0 Replies | 0 Corrections
+                    <span className="ling-date">{ling.lingDate}</span>
+                  </CardFooter>
+                  <CardBody className="ling-reply">
+                    <input
+                      className="ling-reply-text"
+                      type="text"
+                      placeholder="Type your reply or correction here..."
+                    />
+                  </CardBody>
+                </Card>
+              </Link>
+            </>
+          );
+        } else if (props.lang === ling.lingLang) {
+          return (
+            <>
+              <Link to={`/reply/${ling.id}`} className="timeline-no-link">
+                <Card className="ling mb-3">
+                  <CardHeader>
+                    <span className="ling-date">{ling.lingLang}</span>
+                    <h3>
+                      {ling.userIcon} - {ling.userName}
+                    </h3>
+                  </CardHeader>
+                  <CardBody>{ling.lingBody}</CardBody>
+                  <div className="cor-pref-timeline">
+                    <center>
+                      Correction preference: <b>{ling.lingCorPref}</b>
+                    </center>
+                  </div>
+                  <CardFooter>
+                    0 Replies | 0 Corrections
+                    <span className="ling-date">{ling.lingDate}</span>
+                  </CardFooter>
+                  <CardBody className="ling-reply">
+                    <input
+                      className="ling-reply-text"
+                      type="text"
+                      placeholder="Type your reply or correction here..."
+                    />
+                  </CardBody>
+                </Card>
+              </Link>
+            </>
+          );
+        }
+      });
+    }
+  };
+
+  return (
+    <div>
+      {props.lings.filter((ling) => ling.lingLang === props.lang).length > 0 ||
+      props.lang === "Show All" ? (
+        <LingsList lings={props.lings} lang={props.lang} />
+      ) : (
+        "nada, zilch, nichts"
+      )}
+    </div>
+  );
+};
