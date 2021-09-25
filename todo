@@ -2,12 +2,14 @@
 //create reply form
 // render replies
 //work out what to do with order of rendering notifications
+//jwt authentication
+//profile page
+//update about page
 
+pull account name to posts
+pull account name to replies
+add google authentication??
 
+put all languages in to language selections
 
-google authentication
-jwt authentication
-
-profile page
-
-update about page
+make it look nice lmao

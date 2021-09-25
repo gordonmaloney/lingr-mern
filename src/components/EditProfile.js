@@ -5,6 +5,7 @@ import { Control, LocalForm, Errors } from "react-redux-form";
 import { useHistory } from "react-router";
 import { Card, CardHeader } from "reactstrap";
 import { signup } from "../actions/auth";
+import { editProfile } from "../actions/auth";
 
 export const EditProfile = () => {
   const history = useHistory();
@@ -12,6 +13,7 @@ export const EditProfile = () => {
 
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
+    _id: user.result._id,
     userIcon: "😎",
     userName: "",
     email: "",
@@ -25,8 +27,9 @@ export const EditProfile = () => {
 
   const handleSubmit = () => {
     console.log(formData);
-    dispatch(signup(formData, history));
+    dispatch(editProfile(formData, history));
   };
+
 
   return (
     <div className="container">

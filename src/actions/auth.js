@@ -28,8 +28,9 @@ export const signup = (formData, history) => async (dispatch) => {
 
 export const editProfile = (formData, history) => async (dispatch) => {
   try {
-    const { data } = await api.editProfile(formData)
+    const { data } = await api.editProfile(formData._id, formData)
     
+
     dispatch({ type: AUTH, data })
 
     history.push("/");
