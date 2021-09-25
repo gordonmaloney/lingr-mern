@@ -3,9 +3,11 @@ import { Card, CardHeader, Input } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { getPosts } from "../actions/posts";
 import { Ling } from './Ling';
+import { Authentication } from "./SignUp";
 
 export const TimelineComponent = () => {
   const dispatch = useDispatch();
+  
 
   useEffect(() => {
     dispatch(getPosts());
@@ -15,7 +17,7 @@ export const TimelineComponent = () => {
   const [filterLang, setFilterLang] = useState("Show All");
 
   return (
-    <>
+    <>    
       <Card className="mb-3">
         <CardHeader className="text-right">
           Filter by language 👇
