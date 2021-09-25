@@ -25,7 +25,7 @@ export const LingReply = (props) => {
     const dispatch = useDispatch();
 
     const [replyData, setReplyData] = useState({
-      replyId: "",
+      replyId: ling._id,
       replyAuthor: "Gordon Maloney",
       replyBody: "",
       correctionBody: "",
