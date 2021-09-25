@@ -11,12 +11,12 @@ import { TimelineComponent } from "./TimelineComponent";
 import { HeaderComponent } from "./HeaderComponent";
 import { FooterComponent } from "./FooterComponent";
 import { NotificationsComponent } from "./NotificationsComponent";
-import { ProfileComponent } from "./ProfileComponent";
+
 import { LingReply } from "./LingReply";
 import { About } from "./About";
 import { SignUp } from "./SignUp";
 import { SignIn } from "./SignIn";
-
+import { EditProfile } from "./EditProfile";
 
 
 export const Main = () => {
@@ -37,9 +37,7 @@ export const Main = () => {
                 <Route exact path="/notifications">
                   <NotificationsComponent />
                 </Route>
-                <Route exact path="/profile">
-                  <ProfileComponent />
-                </Route>
+
                 <Route path="/reply/:id" component={LingReply} XXX />
                 <Route path="/about">
                   {" "}
@@ -51,6 +49,9 @@ export const Main = () => {
                 </Route>
                 <Route path="/signin">
                   <SignIn />
+                </Route>
+                <Route path="/profile">
+                  <EditProfile />
                 </Route>
 
                 <Route path="/">
