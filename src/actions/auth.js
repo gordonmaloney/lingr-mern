@@ -29,11 +29,12 @@ export const signup = (formData, history) => async (dispatch) => {
 export const editProfile = (formData, history) => async (dispatch) => {
   try {
 
-    const { data } = await api.editProfile(formData)
-    const { data2 } = await api.signUp(formData)
+    const { data2 } = await api.editProfile(formData)
+    const { data } = await api.signUp(formData)
 
-    Promise.resolve(dispatch({ type: DELETE, data })).then(
-    () => dispatch({ type: AUTH, data2 }))
+    await dispatch({ type: DELETE, data2 });
+
+    await dispatch({ type: AUTH, data });
 
     history.push("/profile");
 
