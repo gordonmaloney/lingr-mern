@@ -51,13 +51,21 @@ export const signup = async (req, res) => {
 
 
 export const editProfile = async (req, res) => {
-    const { id: _id } = req.params;
-
-    const post = req.body;
-
-    if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No post with that ID');
     
-    const updatedUser = await user.findByIdAndUpdate(_id, { ...post, _id}, { new: true })
+    const {email, password} = req.body;
 
-    res.json(updatedPost);
+    try {
+        const existingUser = await user.findOne({email})
+
+        console.log(existingUser)
+
+        const result = await user.deleteOne({email})
+
+        const token = jwt.sign({ email: result.email, id: result._id }, 'test', {expiresIn: '1h'} )
+
+        res.status(200).json({ result, token });
+
+    } catch (error) {
+        res.status(500).json({ message: "Something went wrong."})
+    }
 }
