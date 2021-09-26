@@ -5,9 +5,12 @@ import { getPosts } from "../actions/posts";
 import { Ling } from './Ling';
 import { Authentication } from "./SignUp";
 
+import { NewLingComponent } from "./NewLingComponent";
+
+
 export const TimelineComponent = () => {
   const dispatch = useDispatch();
-  
+
 
   useEffect(() => {
     dispatch(getPosts());
@@ -36,6 +39,7 @@ export const TimelineComponent = () => {
           </Input>
         </CardHeader>
       </Card>
+
 
         <Ling
           lings={lings}

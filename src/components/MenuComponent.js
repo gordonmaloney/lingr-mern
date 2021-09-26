@@ -36,7 +36,7 @@ export const MenuComponent = () => {
     }
 
     setUser(JSON.parse(localStorage.getItem('profile')))
-  }, [location, user])
+  }, [location])
 
 
   return user ? (

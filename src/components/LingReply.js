@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardHeader, CardBody, CardFooter, Button } from "reactstrap";
 import { Control, LocalForm, Errors } from "react-redux-form";
 import { useSelector, useDispatch } from "react-redux";
@@ -6,6 +6,8 @@ import { getPosts } from "../actions/posts";
 import { updatePost } from "../actions/posts";
 
 export const LingReply = (props) => {
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+
   const required = (val) => val && val.length;
   const minLength = (len) => (val) => val && val.length >= len;
   const dispatch = useDispatch();
@@ -26,7 +28,7 @@ export const LingReply = (props) => {
 
     const [replyData, setReplyData] = useState({
       replyId: ling._id,
-      replyAuthor: "Gordon Maloney",
+      replyAuthor: user?.result?.userName,
       replyBody: "",
       correctionBody: "",
       replyType: "reply",
@@ -222,7 +224,9 @@ export const LingReply = (props) => {
             </center>
           </div>
           <CardFooter>
+            {user ? 
             <ReplyCorrect content={ling.lingBody} id={ling.id} />
+            : <>Log in or sign up to reply</>}
           </CardFooter>
         </Card>
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { getPosts } from "../actions/posts";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -6,6 +6,8 @@ import { Card, CardHeader, CardBody, CardFooter } from "reactstrap";
 import { Link } from "react-router-dom";
 
 export const NotificationsComponent = () => {
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -15,7 +17,10 @@ export const NotificationsComponent = () => {
     const lings = useSelector((state) => state.posts);
 
 
-    const usersLings = lings.filter(ling => ling.userName === "Gordon Maloney")
+
+    const usersLings = lings.filter(ling => ling.userName === user.result.userName)
+console.log(lings)
+    console.log(usersLings)
 
     var allReplies = []
 

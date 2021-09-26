@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardHeader, CardBody, CardFooter } from "reactstrap";
 import { Link } from "react-router-dom";
 
 export const Ling = (props) => {
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+
   const LingsList = (props) => {
     if (props.lings > 0) {
       return <div className="loader">🤔</div>;
@@ -26,17 +28,35 @@ export const Ling = (props) => {
                     </center>
                   </div>
                   <CardFooter>
-                    {ling.lingRepliesObj.filter(ling => ling.replyType === "reply").length} Replies
-                    |
-                    {ling.lingRepliesObj.filter(ling => ling.replyType === "correction").length} Corrections
+                    {
+                      ling.lingRepliesObj.filter(
+                        (ling) => ling.replyType === "reply"
+                      ).length
+                    }{" "}
+                    Replies |
+                    {
+                      ling.lingRepliesObj.filter(
+                        (ling) => ling.replyType === "correction"
+                      ).length
+                    }{" "}
+                    Corrections
                     <span className="ling-date">{ling.lingDate}</span>
                   </CardFooter>
                   <CardBody className="ling-reply">
-                    <input
-                      className="ling-reply-text"
-                      type="text"
-                      placeholder="Type your reply or correction here..."
-                    />
+                    {user ? (
+                      <input
+                        className="ling-reply-text"
+                        type="text"
+                        placeholder="Type your reply or correction here..."
+                      />
+                    ) : (
+                      <input
+                        className="ling-reply-text"
+                        type="text"
+                        disabled
+                        defaultValue="Log in or sign up to reply"
+                      />
+                    )}
                   </CardBody>
                 </Card>
               </Link>
