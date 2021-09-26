@@ -14,7 +14,7 @@ export const EditProfile = () => {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     _id: user.result._id,
-    userIcon: "😎",
+    userIcon: "",
     userName: "",
     email: "",
     password: "",
@@ -36,7 +36,7 @@ export const EditProfile = () => {
                 <center>
         <Card className="mb-3">
           <CardHeader>
-          <h1>THIS DOESN'T WORK YET LMAO</h1>
+          <h1>THIS DOESN'T WORK YET</h1>
 
           <h3 className="my-3">Edit your details</h3>
           </CardHeader>

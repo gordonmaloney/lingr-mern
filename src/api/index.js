@@ -10,4 +10,4 @@ export const deletePost = (id) => API.delete(`/posts/${id}`)
 export const signIn = (formData) => API.post('/users/signin', formData)
 export const signUp = (formData) => API.post('/users/signup', formData)
 
-export const editProfile = (id, formData) => API.patch('/users/edit', id, formData)
+export const editProfile = (formData) => API.post('/users/edit', formData)

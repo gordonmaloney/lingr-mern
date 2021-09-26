@@ -1,5 +1,5 @@
 import * as api from "../api";
-import { AUTH } from "./ActionTypes";
+import { AUTH, DELETE } from "./ActionTypes";
 
 export const signin = (formData, history) => async (dispatch) => {
   try {
@@ -28,12 +28,15 @@ export const signup = (formData, history) => async (dispatch) => {
 
 export const editProfile = (formData, history) => async (dispatch) => {
   try {
-    const { data } = await api.editProfile(formData._id, formData)
-    
 
-    dispatch({ type: AUTH, data })
+    const { data } = await api.editProfile(formData)
+    const { data2 } = await api.signUp(formData)
 
-    history.push("/");
+    Promise.resolve(dispatch({ type: DELETE, data })).then(
+    () => dispatch({ type: AUTH, data2 }))
+
+    history.push("/profile");
+
   } catch (error) {
     console.log(error);
   }
