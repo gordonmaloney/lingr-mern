@@ -15,7 +15,8 @@ const postSchema = mongoose.Schema({
     replyBody: String,
     correctionBody: String,
     replyType: String,
-    replyDate: String
+    replyDate: String,
+    replyRead: Boolean
     }
   ]
 });
