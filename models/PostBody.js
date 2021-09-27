@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const postSchema = mongoose.Schema({
+  userPersistentId: String,
   userIcon: String,
   userName: String,
   lingBody: String,

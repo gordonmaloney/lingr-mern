@@ -26,18 +26,19 @@ export const signin = async (req, res) => {
 }
 
 export const signup = async (req, res) => {
-    const { email, password, confirmPassword, userName, userIcon } = req.body;
+    const { email, password, confirmPassword, userName, userIcon, persistentId, defaultCorPref } = req.body;
 
     try {
-        const existingUser = await user.findOne({email})
+        const existingUserEmail = await user.findOne({email})
+        const existingUserUsername = await user.findOne({userName})
 
-        if (existingUser) return res.status(400).json({message: "User already exists."})
+        if (existingUserEmail || existingUserUsername) return res.status(400).json({message: "User already exists."})
 
         if(password !== confirmPassword) return res.status(400).json({message: "Passwords don't match."})
 
         const hashedPassword = await bcrypt.hash(password, 12);
 
-        const result = await user.create({ email, password: hashedPassword, userName, userIcon })
+        const result = await user.create({ email, password: hashedPassword, userName, userIcon, persistentId, defaultCorPref })
 
         const token = jwt.sign({ email: result.email, id: result._id }, 'test', {expiresIn: '1h'} )
 
@@ -51,14 +52,14 @@ export const signup = async (req, res) => {
 
 export const editProfile = async (req, res) => {
     
-    const {email, password} = req.body;
+    const {email, password, persistentId} = req.body;
 
     try {
-        const existingUser = await user.findOne({email})
+        const existingUser = await user.findOne({persistentId})
 
         console.log(existingUser)
 
-        const result = await user.deleteOne({email})
+        const result = await user.deleteOne({persistentId})
 
         const token = jwt.sign({ email: existingUser.email, id: existingUser._id }, 'test', {expiresIn: '1h'} )
 
