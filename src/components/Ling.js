@@ -105,7 +105,7 @@ export const Ling = (props) => {
       props.lang === "Show All" ? (
         <LingsList lings={props.lings} lang={props.lang} />
       ) : (
-        "nada, zilch, nichts"
+        <center><br /><br /><h3>Hmm... it doesn't look like there are any lings in {props.lang} yet! Why not be the first to write one?</h3></center>
       )}
     </div>
   );

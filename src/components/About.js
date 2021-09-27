@@ -27,8 +27,14 @@ export const About = () => {
         </p>
         <p>
           The site is <b>free to use</b>, but if you'd like to support it then
-          at some point I should maybe set up a Patreon or something so that
-          you're able to lol.
+          you are very welcome to{" "}
+          <a
+            href="https://www.paypal.com/paypalme/gordonmaloney"
+            target="_blank"
+            rel="noreferrer"
+          >
+            make a donation via Paypal
+          </a>
         </p>
       </>
       <span

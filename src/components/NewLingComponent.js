@@ -5,13 +5,15 @@ import { Control, LocalForm, Errors } from "react-redux-form";
 
 import { createPost } from "../actions/posts";
 
+import { LANGUAGES } from "../data/LANGUAGES";
+
 export const NewLingComponent = (props) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
 
   const dispatch = useDispatch();
 
   const [postData, setPostData] = useState({
-    userIcon: "😎",
+    userIcon: user.result.userIcon,
     userName: user.result.userName,
     lingBody: "",
     lingDate: "",
@@ -26,7 +28,7 @@ export const NewLingComponent = (props) => {
 
   const handleSubmit = () => {
     dispatch(createPost(postData));
-    props.close()
+    props.close();
   };
 
   return (
@@ -79,11 +81,9 @@ export const NewLingComponent = (props) => {
               required,
             }}
           >
-            <option>...</option>
-            <option>Scottish Gaelic</option>
-            <option>Spanish</option>
-            <option>German</option>
-            <option>Portuguese</option>
+          {LANGUAGES.map(language => <option>{language}</option>)}
+
+            
           </Control.select>
           <Errors
             className="text-danger"

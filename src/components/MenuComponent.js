@@ -44,7 +44,7 @@ export const MenuComponent = () => {
       <Row className="mb-3">
         <Col>
           <h4>
-            Welcome to Lingr, {user?.result?.userName}!
+            Welcome to Lingr, {user?.result?.userName}! {user?.result?.userIcon}
           </h4> 
         </Col>
         <Col xs="4" sm="12">

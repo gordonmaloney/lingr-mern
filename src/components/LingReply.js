@@ -4,8 +4,11 @@ import { Control, LocalForm, Errors } from "react-redux-form";
 import { useSelector, useDispatch } from "react-redux";
 import { getPosts } from "../actions/posts";
 import { updatePost } from "../actions/posts";
+import { deletePost } from "../actions/posts";
+import { useHistory } from "react-router";
 
 export const LingReply = (props) => {
+  const history = useHistory()
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
 
   const required = (val) => val && val.length;
@@ -20,7 +23,11 @@ export const LingReply = (props) => {
 
   const ling = lings.filter((ling) => ling._id === props.match.params.id)[0];
 
-  console.log(lings);
+  const handleDelete = () => {
+    dispatch(deletePost(ling._id));
+    history.push('/')
+  };
+
 
   const ReplyCorrect = (lingCorrect) => {
     const [reply, correct] = useState("reply");
@@ -62,6 +69,8 @@ export const LingReply = (props) => {
       dispatch(updatePost(id, ling));
 };
 
+
+
     const ReplyTypeButton = () => {
       if (reply === "reply") {
         return (
@@ -89,6 +98,8 @@ export const LingReply = (props) => {
     return (
       <>
         <div>
+
+
           <LocalForm onSubmit={() => handleSubmit( ling._id )}>
             <Button
               className={reply === "correction" ? "hide" : "show"}
@@ -98,6 +109,9 @@ export const LingReply = (props) => {
             </Button>
             <div className={reply === "correction" ? "show" : "hide"}>
               <Button onClick={() => toggle()}>Cancel Correction</Button>
+
+
+
               <span className="d-inline">
                 {" "}
                 <i>
@@ -223,6 +237,14 @@ export const LingReply = (props) => {
               Correction preference: <b>{ling.lingCorPref}</b>
             </center>
           </div>
+
+
+        { user?.result?.userName === ling.userName &&
+          <Button color="danger" onClick={() => handleDelete()} >
+              Delete
+            </Button>
+        }
+
           <CardFooter>
             {user ? 
             <ReplyCorrect content={ling.lingBody} id={ling.id} />

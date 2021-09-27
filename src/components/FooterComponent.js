@@ -9,12 +9,8 @@ export const FooterComponent = () => {
         <br />
         <h5>
           <Link to="/about">About</Link> |{" "}
-          <a href="https://www.facebook.com/" target="_blank" rel="noreferrer">
-            Facebook
-          </a>{" "}
-          |{" "}
-          <a href="https://twitter.com/" target="_blank" rel="noreferrer">
-            Twitter
+          <a href="https://www.paypal.com/paypalme/gordonmaloney" target="_blank" rel="noreferrer">
+            Donate via Paypal
           </a>
         </h5>
       </center>
