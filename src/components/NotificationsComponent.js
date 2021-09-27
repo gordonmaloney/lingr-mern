@@ -18,7 +18,7 @@ export const NotificationsComponent = () => {
 
 
 
-    const usersLings = lings.filter(ling => ling.userName === user.result.userName)
+    const usersLings = lings.filter(ling => ling.userPersistentId === user.result.persistentId)
 console.log(lings)
     console.log(usersLings)
 

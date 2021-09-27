@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Label, Row, Button, ModalBody } from "reactstrap";
 import { Control, LocalForm, Errors } from "react-redux-form";
+import { v4 as uuidv4 } from 'uuid';
 
 import { useHistory } from "react-router";
 import { signup } from "../actions/auth";
@@ -12,13 +13,17 @@ export const SignUp = () => {
 
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
-    userIcon: "",
+    persistentId: uuidv4(),
+    userIcon: undefined,
     userName: "",
     email: "",
     password: "",
     confirmPassword: "",
+    defaultCorPref: "",
   });
 
+
+  console.log(uuidv4())
   const required = (val) => val && val.length;
   const maxLength = (len) => (val) => !val || val.length <= len;
   const minLength = (len) => (val) => val && val.length >= len;
@@ -163,6 +168,40 @@ export const SignUp = () => {
             }}
           />
         </Row>
+
+
+        <Row className="form-group">
+          <Label htmlFor="newLingCorPref">Your default correction preference</Label>
+          <br />
+          <Control.select
+            type="select"
+            name="newLingCorPref"
+            id="newLingCorPref"
+            model=".newLingCorPref"
+            onChange={(e) =>
+              setFormData({ ...formData, defaultCorPref: e.target.value })
+            }
+            className="mb-3 form-control"
+            validators={{
+              required,
+            }}
+          >
+            <option>...</option>
+            <option>Strict - please correct any errors</option>
+            <option>Relaxed - only correct more significant mistakes</option>
+            <option>Chill - please don't correct me</option>
+          </Control.select>
+          <Errors
+            className="text-danger"
+            model=".newLingCorPref"
+            show="touched"
+            component="div"
+            messages={{
+              required: "Select your correction preference",
+            }}
+          />
+        </Row>
+
 
         <Button onClick={() => console.log(formData)}>form data</Button>
         <Row className="d-flex flex-row-reverse border-top pt-3">

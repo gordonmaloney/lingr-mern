@@ -13,6 +13,7 @@ export const NewLingComponent = (props) => {
   const dispatch = useDispatch();
 
   const [postData, setPostData] = useState({
+    userPersistentId: user.result.persistentId,
     userIcon: user.result.userIcon,
     userName: user.result.userName,
     lingBody: "",
@@ -103,28 +104,17 @@ export const NewLingComponent = (props) => {
             name="newLingCorPref"
             id="newLingCorPref"
             model=".newLingCorPref"
+            defaultValue={user?.result?.defaultCorPref}
             onChange={(e) =>
               setPostData({ ...postData, lingCorPref: e.target.value })
             }
             className="mb-3 form-control"
-            validators={{
-              required,
-            }}
           >
             <option>...</option>
             <option>Strict - please correct any errors</option>
             <option>Relaxed - only correct more significant mistakes</option>
             <option>Chill - please don't correct me</option>
           </Control.select>
-          <Errors
-            className="text-danger"
-            model=".newLingCorPref"
-            show="touched"
-            component="div"
-            messages={{
-              required: "Select your correction preference",
-            }}
-          />
         </Row>
 
         <Row className="d-flex flex-row-reverse border-top pt-3">

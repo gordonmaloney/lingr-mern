@@ -220,7 +220,7 @@ export const LingReply = (props) => {
 
 
   if (!ling) {
-    return <>aefsrgd</>;
+    return <>Hmm... Something has gone wrong!</>;
   } else {
     return (
       <div key={ling._id}>
@@ -239,7 +239,7 @@ export const LingReply = (props) => {
           </div>
 
 
-        { user?.result?.userName === ling.userName &&
+        { user?.result?.persistentId === ling.userPersistentId &&
           <Button color="danger" onClick={() => handleDelete()} >
               Delete
             </Button>
