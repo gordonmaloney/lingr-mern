@@ -25,6 +25,6 @@ app.get('/', (req, res) => {
 const PORT = process.env.PORT || 5000
 const CONNECTION_URL = "mongodb+srv://gordon:gordon123@cluster0.a8rai.mongodb.net/Lings?retryWrites=true&w=majority"
 
-mongoose.connect(process.env.CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => app.listen(PORT, () => console.log(`Server running on port ${PORT}`)))
     .catch((error) => console.log(error.message));  
