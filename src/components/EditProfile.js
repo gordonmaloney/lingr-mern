@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Label, Row, Button, ModalBody } from "reactstrap";
+import { Label, Row, Button, CardBody } from "reactstrap";
 import { Control, LocalForm, Errors } from "react-redux-form";
 import { useHistory } from "react-router";
 import { Card, CardHeader } from "reactstrap";
-import { signup } from "../actions/auth";
-import { editProfile } from "../actions/auth";
+
+
+//import { editProfile } from "../actions/auth";
+import { updateUser } from "../actions/auth";
+
 
 import { EmojiPicker } from "./EmojiPicker";
+
 
 export const EditProfile = () => {
   const history = useHistory();
@@ -15,8 +19,8 @@ export const EditProfile = () => {
 
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
-    _id: user.result._id,
-    persistentId: user.result.persistentId,
+    //_id: user.result._id,
+    //persistentId: user.result.persistentId,
     userIcon: "",
     userName: "",
     email: "",
@@ -30,10 +34,10 @@ export const EditProfile = () => {
   const minLength = (len) => (val) => val && val.length >= len;
 
   const handleSubmit = () => {
-    console.log(formData);
-    dispatch(editProfile(formData, history));
+    //console.log(user.result._id, formData);
+    //dispatch(editProfile(formData, history));
+    dispatch(updateUser(user.result._id, formData, history))
   };
-
 
   return (
     <div className="container">
@@ -44,6 +48,9 @@ export const EditProfile = () => {
           </CardHeader>
           </Card>
         </center>
+
+        <Card>
+        <CardBody className="auth-form">
       <LocalForm onSubmit={() => handleSubmit()}>
       <Row className="form-group">
           <Label htmlFor="newLingLang">Username:</Label>
@@ -215,11 +222,13 @@ export const EditProfile = () => {
         </Row>
 
         <Row className="d-flex flex-row-reverse border-top pt-3">
-          <Button type="submit" color="primary" outline>
+          <Button type="submit" className="submit-btn" color="primary" outline>
             Save
           </Button>
         </Row>
       </LocalForm>
+      </CardBody>
+      </Card>
     </div>
   );
 };

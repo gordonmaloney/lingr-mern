@@ -27,7 +27,7 @@ export const EmojiPicker = ({setFormData}) => {
     <>
             <OutsideClickHandler onOutsideClick={showEmojiPicker => togglePicker(false)} >
 
-                <Button  style={{width: "100%"}} outline type="button" className="EmojiPicker__Btn" onClick={() => toggleEmojiPicker()} block> {emoji} </Button>
+                <Button  style={{width: "100%"}} outline type="button" className="EmojiPicker__Btn submit-btn" onClick={() => toggleEmojiPicker()} block> {emoji} </Button>
 
                 {showEmojiPicker && (
                     <Picker onEmojiClick={onEmojiClick}  pickerStyle={{ width: '100%' }}/> 

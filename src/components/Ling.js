@@ -6,7 +6,7 @@ export const Ling = (props) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
 
   const LingsList = (props) => {
-    if (props.lings > 0) {
+    if (props.lings.length == 0) {
       return <div className="loader">🤔</div>;
     } else {
       return props.lings.map((ling) => {
@@ -14,7 +14,7 @@ export const Ling = (props) => {
           return (
             <>
               <Link to={`/reply/${ling._id}`} className="timeline-no-link">
-                <Card className="ling mb-3">
+                <Card className="ling mb-3 timeline-no-link">
                   <CardHeader>
                     <span className="ling-date">{ling.lingLang}</span>
                     <h3>
@@ -22,18 +22,20 @@ export const Ling = (props) => {
                     </h3>
                   </CardHeader>
                   <CardBody>{ling.lingBody}</CardBody>
-                  <div className="cor-pref-timeline">
-                    <center>
-                      Correction preference: <b>{ling.lingCorPref}</b>
-                    </center>
-                  </div>
+                  {ling.lingCorPref !== "" && (
+                    <div className="cor-pref-timeline">
+                      <center>
+                        Correction preference: {ling.lingCorPref}
+                      </center>{" "}
+                    </div>
+                  )}
                   <CardFooter>
                     {
                       ling.lingRepliesObj.filter(
                         (ling) => ling.replyType === "reply"
                       ).length
                     }{" "}
-                    Replies |
+                    Replies |{" "}
                     {
                       ling.lingRepliesObj.filter(
                         (ling) => ling.replyType === "correction"
@@ -66,7 +68,7 @@ export const Ling = (props) => {
           return (
             <>
               <Link to={`/reply/${ling.id}`} className="timeline-no-link">
-                <Card className="ling mb-3">
+                <Card className="ling mb-3 timeline-no-link">
                   <CardHeader>
                     <span className="ling-date">{ling.lingLang}</span>
                     <h3>
@@ -74,11 +76,13 @@ export const Ling = (props) => {
                     </h3>
                   </CardHeader>
                   <CardBody>{ling.lingBody}</CardBody>
-                  <div className="cor-pref-timeline">
-                    <center>
-                      Correction preference: <b>{ling.lingCorPref}</b>
-                    </center>
-                  </div>
+                  {ling.lingCorPref !== "" && (
+                    <div className="cor-pref-timeline">
+                      <center>
+                        Correction preference: {ling.lingCorPref}
+                      </center>{" "}
+                    </div>
+                  )}
                   <CardFooter>
                     0 Replies | 0 Corrections
                     <span className="ling-date">{ling.lingDate}</span>
@@ -105,7 +109,14 @@ export const Ling = (props) => {
       props.lang === "Show All" ? (
         <LingsList lings={props.lings} lang={props.lang} />
       ) : (
-        <center><br /><br /><h3>Hmm... it doesn't look like there are any lings in {props.lang} yet! Why not be the first to write one?</h3></center>
+        <center>
+          <br />
+          <br />
+          <h3>
+            Hmm... it doesn't look like there are any lings in {props.lang} yet!
+            Why not be the first to write one?
+          </h3>
+        </center>
       )}
     </div>
   );

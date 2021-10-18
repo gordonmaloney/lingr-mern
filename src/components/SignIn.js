@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { Label, Row, Button, ModalBody } from "reactstrap";
 import { Control, LocalForm, Errors } from "react-redux-form";
 import { useHistory } from "react-router";
+import { Card, CardBody } from "reactstrap";
 
 import { signin } from "../actions/auth";
 
@@ -23,12 +24,14 @@ export const SignIn = () => {
   const minLength = (len) => (val) => val && val.length >= len;
 
   const handleSubmit = () => {
-console.log(formData)
+
     dispatch(signin(formData, history));
   };
 
   return (
     <div className="container">
+      <Card>
+      <CardBody className="auth-form">
       <LocalForm onSubmit={() => handleSubmit()}>
 
         <Row className="form-group">
@@ -94,11 +97,13 @@ console.log(formData)
         </Row>
 
         <Row className="d-flex flex-row-reverse border-top pt-3">
-          <Button type="submit" color="primary" outline>
-            Sign Up
+          <Button type="submit" color="primary" outline className="submit-btn">
+            Sign In
           </Button>
         </Row>
       </LocalForm>
+      </CardBody>
+      </Card>
     </div>
   );
 };

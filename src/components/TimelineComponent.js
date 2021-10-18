@@ -3,9 +3,7 @@ import { Card, CardHeader, Input } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { getPosts } from "../actions/posts";
 import { Ling } from "./Ling";
-import { Authentication } from "./SignUp";
 
-import { NewLingComponent } from "./NewLingComponent";
 import { LANGUAGEFILTERS } from "../data/LANGUAGEFILTERS";
 export const TimelineComponent = () => {
   const dispatch = useDispatch();
@@ -14,8 +12,9 @@ export const TimelineComponent = () => {
     dispatch(getPosts());
   }, []);
 
-  const lings = useSelector((state) => state.posts.reverse());
+  const lings = useSelector((state) => state.posts);
   const [filterLang, setFilterLang] = useState("Show All");
+
 
   return (
     <>
@@ -36,7 +35,7 @@ export const TimelineComponent = () => {
         </CardHeader>
       </Card>
 
-      <Ling lings={lings} lang={filterLang} />
+      <Ling lings={lings.reverse()} lang={filterLang} />
     </>
   );
 };

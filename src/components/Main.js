@@ -1,6 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import { Home } from "./Home";
+
+//layout stuff
 
 //packages
 import { Container, Col, Row } from "reactstrap";
@@ -11,7 +13,6 @@ import { TimelineComponent } from "./TimelineComponent";
 import { HeaderComponent } from "./HeaderComponent";
 import { FooterComponent } from "./FooterComponent";
 import { NotificationsComponent } from "./NotificationsComponent";
-
 import { LingReply } from "./LingReply";
 import { About } from "./About";
 import { SignUp } from "./SignUp";
@@ -20,16 +21,22 @@ import { EditProfile } from "./EditProfile";
 
 
 export const Main = () => {
+
+
+  
   return (
     <>
       <BrowserRouter>
         <Container>
           <HeaderComponent />
+
+
+
           <Row>
-            <Col sm="2" md="3">
+            <Col xs="12" md="3">
               <MenuComponent />
             </Col>
-            <Col sm="9">
+            <Col md="9">
               <Switch>
                 <Route exact path="/">
                   <TimelineComponent />

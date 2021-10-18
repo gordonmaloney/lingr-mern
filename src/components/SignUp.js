@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Label, Row, Button, ModalBody } from "reactstrap";
+import { Label, Row, Button } from "reactstrap";
 import { Control, LocalForm, Errors } from "react-redux-form";
 import { v4 as uuidv4 } from 'uuid';
+import { Card, CardBody } from "reactstrap";
 
 import { useHistory } from "react-router";
 import { signup } from "../actions/auth";
@@ -35,6 +36,8 @@ export const SignUp = () => {
 
   return (
     <div className="container">
+      <Card>
+        <CardBody className="auth-form">
       <LocalForm onSubmit={() => handleSubmit()}>
         <Row className="form-group">
           <Label htmlFor="newLingLang">Username:</Label>
@@ -91,7 +94,7 @@ export const SignUp = () => {
             validators={{
               required,
               minLength: minLength(2),
-              maxLength: maxLength(25),
+              maxLength: maxLength(50),
             }}
           />
           <Errors
@@ -203,13 +206,14 @@ export const SignUp = () => {
         </Row>
 
 
-        <Button onClick={() => console.log(formData)}>form data</Button>
         <Row className="d-flex flex-row-reverse border-top pt-3">
-          <Button type="submit" color="primary" outline>
+          <Button type="submit" color="primary" outline className="submit-btn">
             Sign Up
           </Button>
         </Row>
       </LocalForm>
+      </CardBody>
+      </Card>
     </div>
   );
 };

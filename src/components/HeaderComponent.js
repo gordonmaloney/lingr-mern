@@ -4,13 +4,13 @@ import { Container, Row, Col } from 'reactstrap';
 export const HeaderComponent = () => {
     return (
         <>
-        <Container>
+        <Container className="logo-container">
             <Row>
                 <Col>
-                    <center>
-                        <h1>Lingr</h1>
-                        <h3><u>microblogging for language learners</u></h3>
-                    </center>
+
+                        <h1 className="logo-title">Lingr</h1>
+                        <p className="logo-subtitle">microblogging for language learners</p>
+        	            <hr className="logo-hr" />
                 </Col>
             </Row>
         </Container>

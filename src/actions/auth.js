@@ -1,5 +1,5 @@
 import * as api from "../api";
-import { AUTH, DELETE } from "./ActionTypes";
+import { AUTH, DELETE, UPDATEUSER } from "./ActionTypes";
 
 export const signin = (formData, history) => async (dispatch) => {
   try {
@@ -25,7 +25,7 @@ export const signup = (formData, history) => async (dispatch) => {
   }
 };
 
-
+//REPLACED WITH UPDATE BELOW
 export const editProfile = (formData, history) => async (dispatch) => {
   try {
 
@@ -40,5 +40,24 @@ export const editProfile = (formData, history) => async (dispatch) => {
 
   } catch (error) {
     console.log(error);
+  }
+};
+
+
+export const updateUser = (id, post, history) => async (dispatch) => {
+  try {
+
+    post.persistentId = "deprecated"
+
+    const { data } = await api.updateUser(id, post);
+    
+    console.log(data)
+
+    dispatch({ type: UPDATEUSER, payload: data });
+
+    history.push("/profile");
+
+  } catch (error) {
+    console.log("update user error", error);
   }
 };

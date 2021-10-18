@@ -33,7 +33,7 @@ export const About = () => {
             target="_blank"
             rel="noreferrer"
           >
-            make a donation via Paypal
+            make a donation via PayPal
           </a>
         </p>
       </>
@@ -46,7 +46,7 @@ export const About = () => {
         The technical details...
       </span>
       <Collapse isOpen={isOpen}>
-        Lingr is built using React, React Router, Redux and Reactstrap. If you
+        Lingr is built using React, Redux and Reactstrap on the front end and MongoDB, Express and NodeJS on the back. If you
         have ideas for new features or would like to help with development,{" "}
         <i>by all means</i> be in touch!
       </Collapse>
