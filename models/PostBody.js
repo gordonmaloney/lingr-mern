@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 
 const postSchema = mongoose.Schema({
-  userPersistentId: String,
+  //userPersistentId: String,
+  userId: String,
   userIcon: String,
   userName: String,
   lingBody: String,
@@ -12,6 +13,7 @@ const postSchema = mongoose.Schema({
     {
     replyId: String,
     replyAuthor: String,
+    replyAuthorId: String,
     replyBody: String,
     correctionBody: String,
     replyType: String,

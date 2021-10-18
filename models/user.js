@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const userSchema = mongoose.Schema({
-    persistentId: { type: String },
+    //persistentId: { type: String },
     userIcon: { type: String, default: "😃" },
     userName: { type: String },
     email: { type: String },
