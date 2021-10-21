@@ -5,7 +5,9 @@ import { Link } from "react-router-dom";
 export const Ling = (props) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
 
-  const LingsList = (props) => {
+
+  
+    const LingsList = (props) => {
     if (props.lings.length == 0) {
       return <div className="loader">🤔</div>;
     } else {

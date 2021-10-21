@@ -12,7 +12,10 @@ import { EditLingModal } from "./EditLingModal";
 import { updateComment } from "../actions/posts";
 import { EditReplyModal } from "./EditReplyModal";
 
+import { Phrasebook } from "./Phrasebook/Phrasebook";
+
 export const LingReply = (props) => {
+
   const history = useHistory();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
 
@@ -125,9 +128,11 @@ export const LingReply = (props) => {
     };
 
     console.log(ling);
+    
     return (
       <>
         <div>
+
           <LocalForm onSubmit={() => handleSubmit(ling._id)}>
             <Button
               className={
@@ -292,6 +297,7 @@ export const LingReply = (props) => {
   } else {
     return (
       <div key={ling._id}>
+
         <Card className="ling mb-3">
           <CardHeader>
             <span className="ling-date">{ling.lingLang}</span>
@@ -331,6 +337,10 @@ export const LingReply = (props) => {
         </Card>
 
         <Replies ling={ling} replies={ling.lingRepliesObj} />
+
+
+        <Phrasebook />
+
       </div>
     );
   }
