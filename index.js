@@ -6,6 +6,7 @@ import dotenv from 'dotenv'
 
 import postRoutes from './routes/posts.js';
 import userRoutes from './routes/users.js';
+import phrasebookRoutes from './routes/phrasebooks.js';
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.use(cors());
 
 app.use('/posts', postRoutes)
 app.use('/users', userRoutes)
+app.use('/phrasebooks', phrasebookRoutes)
 
 app.get('/', (req, res) => {
     res.send('API running')
