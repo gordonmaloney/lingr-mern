@@ -18,8 +18,6 @@ export const createPhrasebook = async (req, res) => {
     try {
         await newPost.save();
 
-        console.log("controler", post)
-
         res.status(201).json(createPhrasebook)
     } catch (error) {
         res.status(409).json({message: error})
@@ -57,9 +55,10 @@ export const createWord = async (req, res) => {
     const { id: _id } = req.params;
     const newWord = req.body;
 
+    console.log(req.params, req.body)
     
     const phrasebook = await Phrasebook.findById(_id)
-    phrasebook.words.push(newWord)
+    phrasebook.words.unshift(newWord)
     
     phrasebook.save()
     if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No post with that ID');
@@ -71,10 +70,14 @@ export const createWord = async (req, res) => {
 export const updateWord = async (req, res) => {
     
     const { id: _id } = req.params;
-    const { wordId: wordId } = req.params
+    const { commentId: commentId } = req.params
 
     const phrasebook = await Phrasebook.findById(_id)
-    const word = phrasebook.words.filter(word => word._id == wordId)
+
+    console.log(req.params.commentId)
+    const word = phrasebook.words.filter(word => word._id == commentId)
+
+
 
     word[0].word = req.body.word
     word[0].note = req.body.note
