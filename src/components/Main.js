@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
-import { Home } from "./Home";
 
 //layout stuff
 
@@ -18,6 +17,7 @@ import { About } from "./About";
 import { SignUp } from "./SignUp";
 import { SignIn } from "./SignIn";
 import { EditProfile } from "./EditProfile";
+import PhrasebookSidebar from "./Phrasebook/PhrasebookSidebar";
 
 
 export const Main = () => {
@@ -28,8 +28,9 @@ export const Main = () => {
     <>
       <BrowserRouter>
         <Container>
-          <HeaderComponent />
+        <PhrasebookSidebar />
 
+          <HeaderComponent />
 
 
           <Row>

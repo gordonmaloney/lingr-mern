@@ -22,6 +22,23 @@
   color: #f2f2f2 !important
 }
 
+.fab {
+  position: relative;
+  top: 40px;
+}
+
+.fab:focus {
+  outline: 1px !important
+}
+
+.fabicon {
+  color: #225c73 !important;
+}
+
+.fab :active {
+  color: #225c73 !important;
+}
+
 .cancel-btn {
   border: 2px solid #a66556;
   color: #a66556!important;

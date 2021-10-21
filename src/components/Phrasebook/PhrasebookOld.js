@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getPhrasebooks } from "../../actions/phrasebooks";
-import { ListItem } from '@mui/material';
+
 import { createPhrasebook } from "../../actions/phrasebooks";
 import { addWord } from "../../actions/phrasebooks";
 import { deleteWord } from "../../actions/phrasebooks";
@@ -24,7 +24,7 @@ export const Phrasebook = () => {
   }
 
   const handleAddWord = (e) => {
-    e && e.preventDefault()
+    e.preventDefault()
     dispatch(addWord(phrasebooks[phrasebooks.length-1]._id, phrase))
     console.log(phrase)
   }
@@ -67,16 +67,36 @@ export const Phrasebook = () => {
       };
 
 
-
-
   return (
-    <div style={{float: 'right'}}>
+    <div>
+      <button onClick={(e) => handleCreateNew(e)}>Create new phrasebook</button>
+      <br />
+
       <em>{phrase.word}</em>
-      <br /><br />
+      <br />
       {phrase.word && (
         <>
           Add this to your phrasebook?
           <button onClick={(e) => handleAddWord(e)}> Okay</button>
+        </>
+      )}
+
+      {phrasebooks[0] && (
+        <>
+          <br />
+          Your phrasebook:
+          <ul>
+            {phrasebooks[phrasebooks.length-1].words.map((entry, index) => (
+              <li>
+                {entry.word} {entry.note && <> - {entry.note}</>}
+                <br />
+                
+                <button onClick={(e) => handleEditWord(e, entry._id)}>Edit</button>
+
+                <button onClick={(e) => handleDeleteWord(e, entry._id)}>Remove from phrasebook</button>
+              </li>
+            ))}
+          </ul>
         </>
       )}
     </div>
