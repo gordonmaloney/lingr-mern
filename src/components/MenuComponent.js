@@ -102,6 +102,12 @@ export const MenuComponent = () => {
               🧍<span> Profile</span>
             </Button>
           </Link>
+
+          <Link to="/phrasebook"  onClick={toggleNavbar}>
+            <Button color="primary" className="menu-btn" outline>
+            📖<span> Phrasebook</span>
+            </Button>
+          </Link>
           
           <Link to="/" onClick={toggleNavbar}>
             <Button
@@ -165,6 +171,13 @@ export const MenuComponent = () => {
           <Link to="/profile">
             <Button color="primary" className="menu-btn" outline>
               🧍<span className="d-none d-md-inline"> Profile</span>
+            </Button>
+          </Link>
+        </Col>
+        <Col className="d-none d-md-block" sm="12">
+          <Link to="/phrasebook">
+            <Button color="primary" className="menu-btn" outline>
+            📖<span className="d-none d-md-inline"> Phrasebook</span>
             </Button>
           </Link>
         </Col>

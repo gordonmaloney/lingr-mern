@@ -18,7 +18,8 @@ import { SignUp } from "./SignUp";
 import { SignIn } from "./SignIn";
 import { EditProfile } from "./EditProfile";
 import PhrasebookSidebar from "./Phrasebook/PhrasebookSidebar";
-
+import { PhrasebookMain } from "./Phrasebook/PhrasebookMain";
+import { PhrasebookPopUp } from "./Phrasebook/PhrasebookPopUp";
 
 export const Main = () => {
 
@@ -28,7 +29,8 @@ export const Main = () => {
     <>
       <BrowserRouter>
         <Container>
-        <PhrasebookSidebar />
+
+
 
           <HeaderComponent />
 
@@ -62,9 +64,16 @@ export const Main = () => {
                   <EditProfile />
                 </Route>
 
+
+                <Route path="/phrasebook">
+                  <PhrasebookMain />
+                </Route>
+
                 <Route path="/">
                   <TimelineComponent />
                 </Route>
+
+                
               </Switch>
             </Col>
           </Row>

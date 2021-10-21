@@ -13,6 +13,7 @@ import { updateComment } from "../actions/posts";
 import { EditReplyModal } from "./EditReplyModal";
 
 import { Phrasebook } from "./Phrasebook/Phrasebook";
+import { PhrasebookPopUp } from "./Phrasebook/PhrasebookPopUp";
 
 export const LingReply = (props) => {
 
@@ -127,7 +128,6 @@ export const LingReply = (props) => {
       }
     };
 
-    console.log(ling);
     
     return (
       <>
@@ -339,7 +339,6 @@ export const LingReply = (props) => {
         <Replies ling={ling} replies={ling.lingRepliesObj} />
 
 
-        <Phrasebook />
 
       </div>
     );

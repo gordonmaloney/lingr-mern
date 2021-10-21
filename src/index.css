@@ -390,3 +390,11 @@ Button
   padding-left: 10%;
   padding-right: 10%
 }
+
+.chip {
+  margin-left: auto;
+  margin-right: auto;
+
+  font-family: "Poppins", sans-serif;
+  color: #225c73;
+}

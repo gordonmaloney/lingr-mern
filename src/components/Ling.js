@@ -98,6 +98,7 @@ export const Ling = (props) => {
                   </CardBody>
                 </Card>
               </Link>
+
             </>
           );
         }

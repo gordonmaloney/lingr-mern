@@ -1,20 +1,66 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import { ListItem } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import Box from "@mui/material/Box";
-import { Button, Fab } from "@mui/material";
+import { Fab } from "@mui/material";
 import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined";
 import { getPhrasebooks } from "../../actions/phrasebooks";
-import { CSVLink, CSVDownload } from "react-csv";
-
 import { Phrasebook } from "./Phrasebook";
+import { Link } from "react-router-dom";
+
+import { Card, CardHeader } from "reactstrap";
+import { Button } from "reactstrap";
+import { addWord } from "../../actions/phrasebooks";
+import Draggable from "react-draggable";
+import DragHandleIcon from "@mui/icons-material/DragHandle";
+import CloseIcon from "@mui/icons-material/Close";
+import { Chip } from "@mui/material";
 
 export default function PhrasebookSidebar() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const phrasebooks = useSelector((state) => state.phrasebooks);
+
+  const [showPhrasePop, setShowPhrasePop] = useState(false);
+
+  const dispatch = useDispatch();
+  const [phrase, setPhrase] = useState({ word: "", note: "" });
+
+  function getSelectionText() {
+    var text = "";
+    var activeEl = document.activeElement;
+    var activeElTagName = activeEl ? activeEl.tagName.toLowerCase() : null;
+    if (
+      activeElTagName == "textarea" ||
+      (activeElTagName == "input" &&
+        /^(?:text|search|password|tel|url)$/i.test(activeEl.type) &&
+        typeof activeEl.selectionStart == "number")
+    ) {
+      text = activeEl.value.slice(
+        activeEl.selectionStart,
+        activeEl.selectionEnd
+      );
+    } else if (window.getSelection) {
+      text = window.getSelection().toString();
+    }
+    return text;
+  }
+
+  document.onmouseup =
+    document.onkeyup =
+    document.onselectionchange =
+      function () {
+        setPhrase({ ...phrase, word: getSelectionText() });
+      };
+
+  const handleAddWord = (e) => {
+    e && e.preventDefault();
+    dispatch(addWord(phrasebooks[phrasebooks.length - 1]._id, phrase));
+    console.log(phrase);
+  };
 
   const [state, setState] = React.useState({
     right: false,
@@ -38,25 +84,32 @@ export default function PhrasebookSidebar() {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List>
-        <ListItem>
-          <h4>Your phrasebook</h4>
-</ListItem>
-<ListItem>
-          {phrasebooks.length > 0 && (
-            <CSVLink
-              filename={"my-phrasebook.csv"}
-              data={phrasebooks[phrasebooks.length - 1].words}
-            >
-              Download as CSV
-            </CSVLink>
-          )}
-        </ListItem>
-      </List>
-      <Divider />
+      <Card style={{ borderRadius: "0px" }}>
+        <CardHeader style={{ borderRadius: "0px" }}>
+          <Link to="/phrasebook" className="timeline-no-link">
+            <h4>Your phrasebook</h4>
+          </Link>
+        </CardHeader>
+      </Card>
+      <center>
+        {!showPhrasePop && (
+          <>
+            <br />
+            <Chip
+              className="chip"
+              variant="outlined"
+              label="Show pop-up"
+              onClick={() => {
+                setShowPhrasePop(true);
+              }}
+            />
+          </>
+        )}
+      </center>
+
       <List>
         {!user ? (
-          <ListItem>"Log in to see your phrasebook."</ListItem>
+          <ListItem>Log in to see your phrasebook.</ListItem>
         ) : (
           phrasebooks.length > 0 &&
           phrasebooks[phrasebooks.length - 1].words.map((entry, index) => (
@@ -66,6 +119,32 @@ export default function PhrasebookSidebar() {
           ))
         )}
       </List>
+
+
+{/* ADD PHRASE FROM SIDE BAR
+      <Card
+        style={{
+          position: "fixed",
+          width: "250px",
+          bottom: 0,
+          borderRadius: "0px",
+        }}
+      >
+        <CardHeader style={{ borderRadius: "0px" }}>
+          Add a phrase
+          <input placeholder="Type here..." onChange={e => setPhrase(e.target.value)}/>
+          <Button
+            className="submit-btn my-3"
+            color="primary"
+            outline
+            onClick={(e) => handleAddWord(e)}
+          >
+            Add
+          </Button>{" "}
+        </CardHeader>
+      </Card>
+      */}
+
     </Box>
   );
 
@@ -89,6 +168,55 @@ export default function PhrasebookSidebar() {
           {list("right")}
         </Drawer>
       </React.Fragment>
+
+      {showPhrasePop && (
+        <Draggable handle=".handle">
+          <div
+            style={{
+              zIndex: 10,
+              position: "absolute",
+              top: 200,
+              right: 50,
+              backdropFilter: "blur(2px)",
+              backgroundColor: "rgba(255, 255, 255, 0.7)",
+              boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+              borderRadius: "5px",
+              border: "1px solid rgba( 255, 255, 255, 0.18 )",
+              width: "250px",
+              padding: "5px 7px",
+            }}
+          >
+            <div className="handle">
+              <DragHandleIcon /> Add to phrasebook?{" "}
+              <CloseIcon
+                style={{ float: "right" }}
+                onClick={() => {
+                  setShowPhrasePop(false);
+                }}
+              />
+              {console.log(phrase.word)}
+              <br />
+              <br />
+              <center>
+                {phrase.word ? (
+                  <em>{phrase.word}</em>
+                ) : (
+                  <em>Highlight a word to add it to your phrasebook</em>
+                )}
+              </center>
+              <br />
+            </div>
+            <Button
+              className="submit-btn"
+              color="primary"
+              outline
+              onClick={(e) => handleAddWord(e)}
+            >
+              Add
+            </Button>
+          </div>
+        </Draggable>
+      )}
     </div>
   );
 }
