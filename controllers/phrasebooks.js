@@ -54,8 +54,6 @@ export const createWord = async (req, res) => {
   
     const { id: _id } = req.params;
     const newWord = req.body;
-
-    console.log(req.params, req.body)
     
     const phrasebook = await Phrasebook.findById(_id)
     phrasebook.words.unshift(newWord)
@@ -74,7 +72,6 @@ export const updateWord = async (req, res) => {
 
     const phrasebook = await Phrasebook.findById(_id)
 
-    console.log(req.params.commentId)
     const word = phrasebook.words.filter(word => word._id == commentId)
 
 
