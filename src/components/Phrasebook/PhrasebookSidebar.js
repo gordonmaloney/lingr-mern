@@ -8,7 +8,7 @@ import Divider from "@mui/material/Divider";
 import Box from "@mui/material/Box";
 import { Fab } from "@mui/material";
 import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined";
-import { getPhrasebooks } from "../../actions/phrasebooks";
+import { getPhrasebooks, createPhrasebook } from "../../actions/phrasebooks";
 import { Phrasebook } from "./Phrasebook";
 import { Link } from "react-router-dom";
 
@@ -19,10 +19,29 @@ import Draggable from "react-draggable";
 import DragHandleIcon from "@mui/icons-material/DragHandle";
 import CloseIcon from "@mui/icons-material/Close";
 import { Chip } from "@mui/material";
+import { useLocation } from "react-router";
+
 
 export default function PhrasebookSidebar() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const phrasebooks = useSelector((state) => state.phrasebooks);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    dispatch(getPhrasebooks());
+  }, []);
+
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("profile")))
+  }, [location])
+
+  const userPhrasebook = phrasebooks.filter(phrasebook => phrasebook.userId == user?.result._id)
+  
+  if (phrasebooks.length > 0 && userPhrasebook == []) {
+    console.log("creating phrasebook...")
+    dispatch(createPhrasebook({userId: user.result._id}));
+  }
 
   const [showPhrasePop, setShowPhrasePop] = useState(false);
 
@@ -58,7 +77,7 @@ export default function PhrasebookSidebar() {
 
   const handleAddWord = (e) => {
     e && e.preventDefault();
-    dispatch(addWord(phrasebooks[phrasebooks.length - 1]._id, phrase));
+    dispatch(addWord(userPhrasebook[userPhrasebook.length - 1]._id, phrase));
     console.log(phrase);
   };
 
@@ -92,7 +111,7 @@ export default function PhrasebookSidebar() {
         </CardHeader>
       </Card>
       <center>
-        {!showPhrasePop && (
+        {!showPhrasePop && user?.result && (
           <>
             <br />
             <Chip
@@ -108,11 +127,11 @@ export default function PhrasebookSidebar() {
       </center>
 
       <List>
-        {!user ? (
+        {!user?.result ? (
           <ListItem>Log in to see your phrasebook.</ListItem>
         ) : (
           phrasebooks.length > 0 &&
-          phrasebooks[phrasebooks.length - 1].words.map((entry, index) => (
+          userPhrasebook[userPhrasebook.length - 1].words.map((entry, index) => (
             <ListItem>
               {entry.word} {entry.note && <> - {entry.note}</>}
             </ListItem>
@@ -178,7 +197,7 @@ export default function PhrasebookSidebar() {
               top: 200,
               right: 50,
               backdropFilter: "blur(2px)",
-              backgroundColor: "rgba(255, 255, 255, 0.7)",
+              backgroundColor: "rgba(255, 255, 255, 0.8)",
               boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
               borderRadius: "5px",
               border: "1px solid rgba( 255, 255, 255, 0.18 )",

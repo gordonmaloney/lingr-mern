@@ -4,13 +4,12 @@ import { EditPhraseComponent } from "./EditPhraseComponent";
 
 export const EditPhraseModal = (props) => {
 
-    console.log(props)
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
 
   return (
     <>
-      <Button onClick={toggle} size="sm">
+      <Button onClick={toggle} size="sm"   style={{transform: 'scale(0.8)'}}>
         Edit
       </Button>
       
