@@ -59,7 +59,7 @@ export const MenuComponent = () => {
       <div className="d-block d-md-none">
         <Navbar color="faded" light>
           <NavbarBrand href="/" className="mr-auto" >
-           {user && <h4 className="welcome-msg">Welcome to Lingr, {user?.result?.userName}! {user?.result?.userIcon}
+           {user?.result && <h4 className="welcome-msg">Welcome to Lingr, {user?.result?.userName}! {user?.result?.userIcon}
             </h4> }
           </NavbarBrand>
           <NavbarToggler onClick={toggleNavbar} className="mr-2" />

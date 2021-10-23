@@ -5,6 +5,7 @@ import { getPosts } from "../actions/posts";
 import { Ling } from "./Ling";
 
 import { LANGUAGEFILTERS } from "../data/LANGUAGEFILTERS";
+
 export const TimelineComponent = () => {
   const dispatch = useDispatch();
 
@@ -14,7 +15,6 @@ export const TimelineComponent = () => {
 
   const lings = useSelector((state) => state.posts);
   const [filterLang, setFilterLang] = useState("Show All");
-
 
   return (
     <>

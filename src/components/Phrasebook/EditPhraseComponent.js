@@ -14,7 +14,7 @@ export const EditPhraseComponent = ({phrasebook, phrase, close}) => {
 
   const [wordData, setWordData] = useState({
     word: phrase.word,
-    word: phrase.note
+    note: phrase.note
   });
 
 
@@ -24,6 +24,7 @@ export const EditPhraseComponent = ({phrasebook, phrase, close}) => {
     close();
   };
 
+  console.log(wordData)
   return (
     <div className="container">
       <LocalForm onSubmit={() => handleSubmit(phrase)}>
