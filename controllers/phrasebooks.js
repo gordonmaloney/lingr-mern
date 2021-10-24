@@ -15,10 +15,19 @@ export const createPhrasebook = async (req, res) => {
     const post = req.body;
     const newPost = new Phrasebook(post);
 
-    try {
-        await newPost.save();
+    Phrasebook.findOne({userId: req.body.userId})
+    .then(phrasebook =>{
+        if (phrasebook) {
+            res.send("this user already has a phrasebook")
+        } else {
+            console.log("this user does not have a phrasebook yet - creating one")
+            newPost.save();
+            res.status(201).json(createPhrasebook)
+        }
+    })
 
-        res.status(201).json(createPhrasebook)
+    try { 
+
     } catch (error) {
         res.status(409).json({message: error})
     }
