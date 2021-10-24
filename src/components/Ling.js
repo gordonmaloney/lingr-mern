@@ -24,7 +24,7 @@ export const Ling = (props) => {
                     </h3>
                   </CardHeader>
                   <CardBody>{ling.lingBody}</CardBody>
-                  {ling.lingCorPref !== "" && (
+                  {ling.lingCorPref && (
                     <div className="cor-pref-timeline">
                       <center>
                         Correction preference: {ling.lingCorPref}

@@ -21,12 +21,12 @@ export const EditProfile = () => {
   const [formData, setFormData] = useState({
     //_id: user.result._id,
     //persistentId: user.result.persistentId,
-    userIcon: "",
-    userName: "",
-    email: "",
+    userIcon: user.result.userIcon,
+    userName: user.result.userName,
+    email: user.result.email,
     password: "",
     confirmPassword: "",
-    defaultCorPref: ""
+    defaultCorPref: user.result.defaultCorPref
   });
 
   const required = (val) => val && val.length;

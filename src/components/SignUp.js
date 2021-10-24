@@ -15,7 +15,7 @@ export const SignUp = () => {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     persistentId: uuidv4(),
-    userIcon: undefined,
+    userIcon: "😀",
     userName: "",
     email: "",
     password: "",

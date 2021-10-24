@@ -20,9 +20,11 @@ export const NewLingComponent = (props) => {
     lingBody: "",
     lingDate: "",
     lingLang: "",
-    lingCorPref: "",
+    lingCorPref: user.result.defaultCorPref,
     lingRepliesObj: [],
   });
+
+  console.log(user.result)
 
   const required = (val) => val && val.length;
   const maxLength = (len) => (val) => !val || val.length <= len;
@@ -105,7 +107,7 @@ export const NewLingComponent = (props) => {
             name="newLingCorPref"
             id="newLingCorPref"
             model=".newLingCorPref"
-            defaultValue={user?.result?.defaultCorPref}
+            defaultValue={user.result.defaultCorPref}
             onChange={(e) =>
               setPostData({ ...postData, lingCorPref: e.target.value })
             }

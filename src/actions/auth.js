@@ -36,7 +36,7 @@ export const editProfile = (formData, history) => async (dispatch) => {
 
     await dispatch({ type: AUTH, data });
 
-    history.push("/profile");
+    history.push("/");
 
   } catch (error) {
     console.log(error);
@@ -55,7 +55,7 @@ export const updateUser = (id, post, history) => async (dispatch) => {
 
     dispatch({ type: UPDATEUSER, payload: data });
 
-    history.push("/profile");
+    history.push("/");
 
   } catch (error) {
     console.log("update user error", error);

@@ -10,10 +10,11 @@ import { Phrasebook } from "./Phrasebook";
 import { CSVLink, CSVDownload } from "react-csv";
 import { EditPhraseModal } from "./EditPhraseModal";
 import { Button } from "reactstrap";
-
+import { useLocation } from "react-router";
 import { Container, Row, Col } from "reactstrap";
 
 export const PhrasebookMain = () => {
+  const location = useLocation();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const phrasebooks = useSelector((state) => state.phrasebooks);
 
@@ -23,14 +24,19 @@ export const PhrasebookMain = () => {
     dispatch(getPhrasebooks());
   }, []);
 
+  useEffect(() => {
+    console.log(userPhrasebook)
+  }, [phrasebooks])
+
   const userPhrasebook = phrasebooks.filter(phrasebook => phrasebook.userId == user?.result._id)
   
-  userPhrasebook && console.log("user phrasebook", userPhrasebook)
-
-  if (phrasebooks.length > 0 && userPhrasebook == []) {
+useEffect(() => {
+  if (phrasebooks.length > 0 && userPhrasebook.length === 0) {
     console.log("creating phrasebook...")
     dispatch(createPhrasebook({userId: user.result._id}));
   }
+  dispatch(getPhrasebooks());
+}, [location])
 
 
   const handleDeleteWord = (e, wordId) => {
@@ -48,6 +54,7 @@ export const PhrasebookMain = () => {
     );
   };
 
+  
   return (
     <div className="container">
       <center>
@@ -58,25 +65,35 @@ export const PhrasebookMain = () => {
         </Card>
       </center>
 
-      {phrasebooks.length > 0 && (
+{console.log(phrasebooks)}
+{console.log(userPhrasebook)}
+
+      {phrasebooks.length > 0 && userPhrasebook.length > 0 ? (
         <>
               <p>To add a translation or a note to any of the entries in your phrasebook, just hit 'edit'.
-                <br />You can also {" "}
+                <br />
+       {userPhrasebook > 0 && <>
+        You can also {" "}
         <CSVLink
           filename={"my-phrasebook.csv"}
-          data={userPhrasebook[userPhrasebook.length - 1].words.map(
+          data={userPhrasebook[0].words.map(
             ({ _id, ...attributs }) => attributs
           )}
         >
           download your phrasebook as a CSV file
         </CSVLink>
+
         {" "}for use with flashcard apps.
+        </>}
         </p>
-        </>
-      )}
+        
+          
+      
+
 
       <Container style={{width: '75%'}}>
-        {phrasebooks.length > 0 &&
+
+        {userPhrasebook[0].words &&
           userPhrasebook[userPhrasebook.length - 1].words.map((entry, index) => (
             <Row className="phrasebook-listitems justify-content-between">
               
@@ -106,6 +123,8 @@ export const PhrasebookMain = () => {
             </Row>
           ))}
       </Container>
+</>
+):<>Loading...</>}
     </div>
   );
 };

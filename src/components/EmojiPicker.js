@@ -15,7 +15,6 @@ export const EmojiPicker = ({setFormData}) => {
   const onEmojiClick = (e, emojiObject) => {
     e.preventDefault();
     toggleEmojiPicker();
-    console.log(emojiObject.emoji)
     setEmoji(emojiObject.emoji)
     togglePicker(false)
 

@@ -234,7 +234,7 @@ export const LingReply = (props) => {
                   {reply.replyBody}
                 </CardBody>
                 <CardFooter className="text-right replySignOff">
-                  {user.result._id === reply.replyAuthorId && (
+                  {user && user.result._id === reply.replyAuthorId && (
                     <div style={{ float: "left" }}>
 
 
@@ -265,7 +265,7 @@ export const LingReply = (props) => {
                   {reply.replyBody}
                 </CardBody>
                 <CardFooter className="text-right replySignOff">
-                  {user.result._id === reply.replyAuthorId && (
+                  {user && user.result._id === reply.replyAuthorId && (
                     <div style={{ float: "left" }}>
                       <EditReplyModal ling={ling} reply={reply}/>
 
@@ -308,7 +308,7 @@ export const LingReply = (props) => {
           <CardBody>
             {ling.lingBody}
 
-            {user?.result?._id === ling.userId && (
+            {user && user?.result?._id === ling.userId && (
               <>
                 <br />
                 <br />

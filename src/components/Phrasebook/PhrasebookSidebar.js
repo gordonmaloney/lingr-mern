@@ -38,10 +38,14 @@ export default function PhrasebookSidebar() {
 
   const userPhrasebook = phrasebooks.filter(phrasebook => phrasebook.userId == user?.result._id)
   
-  if (phrasebooks.length > 0 && userPhrasebook == []) {
-    console.log("creating phrasebook...")
-    dispatch(createPhrasebook({userId: user.result._id}));
-  }
+
+  useEffect(() => {
+    if (phrasebooks.length > 0 && userPhrasebook.length === 0 && user) {
+      console.log("creating phrasebook...")
+      dispatch(createPhrasebook({userId: user.result._id}));
+    }
+    dispatch(getPhrasebooks());
+  }, [location])
 
   const [showPhrasePop, setShowPhrasePop] = useState(false);
 
@@ -127,10 +131,10 @@ export default function PhrasebookSidebar() {
       </center>
 
       <List>
-        {!user?.result ? (
+        {!user?.result && userPhrasebook ? (
           <ListItem>Log in to see your phrasebook.</ListItem>
         ) : (
-          phrasebooks.length > 0 &&
+          phrasebooks.length > 0 && userPhrasebook.length > 0&&
           userPhrasebook[userPhrasebook.length - 1].words.map((entry, index) => (
             <ListItem>
               {entry.word} {entry.note && <> - {entry.note}</>}

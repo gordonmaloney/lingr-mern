@@ -3,8 +3,8 @@ import axios from 'axios';
 
 //const url = 'https://lingr-app.herokuapp.com/potlucks';
 
-const API = axios.create({baseURL: 'https://lingr-app.herokuapp.com' });
-//const API = axios.create({baseURL: 'http://localhost:5000' });
+//const API = axios.create({baseURL: 'https://lingr-app.herokuapp.com' });
+const API = axios.create({baseURL: 'http://localhost:5000' });
 
 //comments
 export const fetchPosts = () => API.get('/posts');
