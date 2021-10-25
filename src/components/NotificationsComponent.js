@@ -68,7 +68,7 @@ export const NotificationsComponent = () => {
                 </CardHeader>
                 <CardBody>{ling.lingBody}</CardBody>
               </Card>
-              <Card className="ml-5 mr-5 mb-3 ">
+              <Card className="ml-5 mr-5 mb-3 mt-1">
                 <CardBody>
                   <div className={reply.replyType} />
                   <p className="ml-3 mb-3 correction-body">
