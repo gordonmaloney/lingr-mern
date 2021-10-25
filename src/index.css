@@ -385,6 +385,15 @@ Button
     -1px  1px 0 #f2f2f2,
     -1px  0   0 #f2f2f2;
   }
+  .welcome-msg{
+    font-size: 18px !important;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .welcome-msg{
+    font-size: 14px !important;
+  }
 }
 
 @media only screen and (max-width: 290px) {
