@@ -9,7 +9,7 @@ export const NewLingModal = () => {
   return (
     <div>
       <Button color="primary" onClick={toggle} outline className="menu-btn">
-        💭<span className="d-inline d-sm-none d-md-inline"> New Ling</span>
+        💭<span className="d-inline d-md-inline"> New Ling</span>
       </Button>
       
       <Modal isOpen={modal} toggle={toggle} className="new-ling-modal">
