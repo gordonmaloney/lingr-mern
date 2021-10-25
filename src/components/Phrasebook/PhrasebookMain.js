@@ -72,7 +72,7 @@ useEffect(() => {
         <>
               <p>To add a translation or a note to any of the entries in your phrasebook, just hit 'edit'.
                 <br />
-       {userPhrasebook > 0 && <>
+       {userPhrasebook.length > 0 && <>
         You can also {" "}
         <CSVLink
           filename={"my-phrasebook.csv"}
