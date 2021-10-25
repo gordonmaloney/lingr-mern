@@ -176,7 +176,7 @@ export default function PhrasebookSidebar() {
       <React.Fragment key={"right"}>
         <Fab
           className="fab"
-          style={{ float: "right" }}
+          style={{ float: "right", zIndex: 5 }}
           onClick={toggleDrawer("right", true)}
           aria-label="Phrasebook"
         >

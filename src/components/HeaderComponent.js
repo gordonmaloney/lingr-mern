@@ -8,6 +8,8 @@ export const HeaderComponent = () => {
     return (
         <>
         <Container className="logo-container">
+        <PhrasebookSidebar />
+
             <Row className="mb-0">
                 <Col sm="8" >
 
@@ -15,7 +17,6 @@ export const HeaderComponent = () => {
                         <p className="logo-subtitle">microblogging for language learners</p>
                 </Col>
                 <Col>
-                        <PhrasebookSidebar />
                         {/*<PhrasebookPopUp />*/}
         </Col>
         </Row>
