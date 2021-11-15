@@ -21,7 +21,7 @@ export const EditLingComponent = ({ling, close}) => {
     lingDate: "",
     lingLang: ling.lingLang,
     lingCorPref: ling.lingCorPref,
-    lingRepliesObj: [],
+    lingRepliesObj: ling.lingRepliesObj,
   });
 
   const required = (val) => val && val.length;

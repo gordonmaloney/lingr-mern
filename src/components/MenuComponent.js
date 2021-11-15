@@ -59,6 +59,7 @@ export const MenuComponent = () => {
       <div className="d-block d-md-none">
         <Navbar color="faded" light>
           <NavbarBrand href="/" className="mr-auto" >
+           
            {user?.result && <h4 className="welcome-msg">Welcome to Lingr, {user?.result?.userName}! {user?.result?.userIcon}
             </h4> }
           </NavbarBrand>
@@ -204,7 +205,8 @@ export const MenuComponent = () => {
         <Navbar color="faded" light>
           <NavbarBrand href="/" className="mr-auto">
             {" "}
-            Welcome to Lingr, {user?.result?.userName}! {user?.result?.userIcon}
+            {//user && <>Welcome to Lingr, {user?.result?.userName}! {user?.result?.userIcon}</>
+            }
           </NavbarBrand>
           <NavbarToggler onClick={toggleNavbar} className="mr-2" />
           

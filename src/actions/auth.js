@@ -47,8 +47,6 @@ export const editProfile = (formData, history) => async (dispatch) => {
 export const updateUser = (id, post, history) => async (dispatch) => {
   try {
 
-    post.persistentId = "deprecated"
-
     const { data } = await api.updateUser(id, post);
     
     console.log(data)
